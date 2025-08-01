@@ -1,6 +1,6 @@
 import asyncio
 import time
-import random
+import secrets
 
 END_OF_QUEUE = "This is the end..."
 
@@ -15,7 +15,7 @@ async def producer(queue):
         msg = f"Emitting {emit_me}"
         print(msg)
         # simulate some IO time
-        await asyncio.sleep(random.uniform(0, 0.5))
+        await asyncio.sleep(secrets.SystemRandom().uniform(0, 0.5))
         await queue.put(msg)
 
 
@@ -26,7 +26,7 @@ async def consumer(queue):
     #     break
     print(f"Got message: {message}")
     # simulate some IO time
-    await asyncio.sleep(random.uniform(0, 1.0))
+    await asyncio.sleep(secrets.SystemRandom().uniform(0, 1.0))
 
 
 if __name__ == "__main__":
